@@ -23,7 +23,7 @@ class BaseSchedule(object):
         class_name = '%s.%s' % (self.__class__.__module__,
                 self.__class__.__name__)
         time_args = tuple([getattr(self, name) for name in self._time_attrs])
-        return md5(str((class_name, time_args))).hexdigest()
+        return md5(str((class_name, time_args)).encode('utf-8')).hexdigest()
 
     def time_before(self, time):
         kwargs = dict((k, getattr(self, k)) for k in self._time_attrs)
